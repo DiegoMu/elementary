@@ -1,0 +1,14 @@
+{
+    "name": "diegomux/elementary",
+    "authors": [
+        {
+            "name": "Diego Muñoz",
+            "email": "diego.m.sistemas@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "symfony/yaml": "^4.3",
+        "twbs/bootstrap": "4.2.1"
+    }
+}
