@@ -1,0 +1,8 @@
+pages:
+  -
+    url: '/'
+    elements:
+      -
+        id:
+        label:
+        text:

@@ -1,0 +1,13 @@
+site_name: Elementary
+languague: en
+use_database: true
+debug_enable: true
+data_base:
+  type: mysql
+  user: user
+  host: localhost
+  password: 
+  name:
+theme:
+  active_theme: 'Elementary'
+  require_datbase: false

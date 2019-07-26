@@ -1,0 +1,5 @@
+error_messages:
+	- PDO01:
+     label: <nolabel>
+     text: "The site found an error with the database, the server is not responding to the request, please check the site configuration and that the database server is running."
+system_messages:
