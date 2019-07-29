@@ -24,7 +24,7 @@
 				$message['message'] 	= $content;
 				$message['stack_trace'] = $stack_trace;
 			} else {
-				$message['message'] 	= $this->loadMessagesTemplate($translingua_id);
+				$message['message'] 	= $this->loadMessagesTemplate($translingua_id)['text'];
 				$message['stack_trace'] = '';
 			}
 
@@ -33,8 +33,6 @@
 
 		public function printMessage(): void
 		{
-			echo $this->message['time_stamp'] .'<br>';
-			echo $this->message['client_ip'] .'<br>';
 			echo $this->message['type'] .'<br>';
 			echo $this->message['message'] .'<br>';
 			echo $this->message['stack_trace'] .'<br>';
@@ -48,7 +46,7 @@
 		private function loadMessagesTemplate($translingua_id){
 			try
 			{
-				$template_message = Yaml::parseFile('localize/' . $this->config['languague'] . '/messages.yaml');
+				$template_message = Yaml::parseFile(__DIR__ . '/localize/' . $this->config['languague'] . '/messages.yaml');
 				$error_message = $template_message['error_messages'][$translingua_id];
 				return $error_message;
 			} catch (ParseException $e) {

@@ -1,0 +1,26 @@
+name: Elementary
+version: 0.1
+require:
+  -
+    name: jquery
+    load_order: 1
+    vendor_dir: components/jquery/
+    css:
+    js:
+      - jquery.js
+  -
+    name: bootstrap
+    load_order: 2
+    vendor_dir: twbs/bootstrap/dist
+    css: 
+      - /css/bootstrap.css
+    js:
+      - /js/bootstrap.js
+jscripts_directory: js
+css_directory: css
+resources_directory: resources
+files_directory: 
+jscirpts:
+  - elementary.js
+styleshets:
+  - elementary.css
