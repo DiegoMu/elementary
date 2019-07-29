@@ -4,5 +4,5 @@ error_messages:
     text: "The site found an error with the database, the server is not responding to the request, please check the site configuration and that the database server is running."
   FNF01: 
     label: '<nolabel>'
-    text: "One of the configuration file was not found, please turn on the 'debug_enable' flag to see more details"
+    text: "One of configuration files was not found, please turn on the 'debug_enable' flag to see more details"
 system_messages:

@@ -1,26 +1,61 @@
 name: Elementary
 version: 0.1
-require:
-  -
-    name: jquery
-    load_order: 1
-    vendor_dir: components/jquery/
-    css:
-    js:
-      - jquery.js
-  -
-    name: bootstrap
-    load_order: 2
-    vendor_dir: twbs/bootstrap/dist
-    css: 
-      - /css/bootstrap.css
-    js:
-      - /js/bootstrap.js
-jscripts_directory: js
 css_directory: css
+files_directory: files
+jscripts_directory: js
 resources_directory: resources
-files_directory: 
+template_directoy: templates
 jscirpts:
   - elementary.js
 styleshets:
   - elementary.css
+require:
+  -
+    name: jquery
+    public: true
+    load_order: 1
+    vendor_dir: components/jquery/
+    copy_all: false
+    js:
+      - jquery.js
+  -
+    name: bootstrap
+    public: true
+    load_order: 2
+    vendor_dir: twbs/bootstrap/dist
+    copy_all: false
+    css: 
+      - /css/bootstrap.css
+    js:
+      - /js/bootstrap.js
+layout:
+  container_class: container
+  regions:
+    -
+      name: header
+      render_order: 1
+      class: header
+      id: header
+      template: 
+      wrapper: header
+    -
+      name: navigation
+      render_order: 2
+      class: nav
+      id: nav
+      template:
+      wrapper: nav
+    -
+      name: content
+      render_order: 3
+      class: content
+      id: content
+      template:
+      wrapper: section
+    -
+      name: footer
+      render_order: 4
+      class: footer
+      id: footer
+      template:
+      wrapper: footer

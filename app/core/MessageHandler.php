@@ -22,7 +22,7 @@
 
 			if($this->config['debug_enable']) {
 				$message['message'] 	= $content;
-				$message['stack_trace'] = $stack_trace;
+				$message['stack_trace'] = explode('#', $stack_trace);
 			} else {
 				$message['message'] 	= $this->loadMessagesTemplate($translingua_id)['text'];
 				$message['stack_trace'] = '';
@@ -38,7 +38,7 @@
 			echo $this->message['stack_trace'] .'<br>';
 		}
 
-		public function getMessage(): array
+		public function getMessage()
 		{
 			return $this->message;
 		}

@@ -7,21 +7,15 @@
 	class Bootstrap extends Core
 	{
 
-		public function loadTheme()
-		{
-			$message_handler = new MessageHandler();
-			$config_theme = $this->config['theme'];
-			try {
-				$theme_settings = Yaml::parseFile($config_theme['active_theme']. '/settings.yaml');
-			} catch (ParseException $e){
-				$message_handler->setMessage('FNF01','Critical Error', $e->getMessage(), $e->getTraceAsString());
-				$message_handler->printMessage();
-				exit();
+		public function loadelementary() {
+			$layout_engine = new LayoutEngine();
+			if (!$this->testConection()) {
+				$layout_engine->setRegion('content', $this->message_handler->getMessage(), array('display'=>true), 'error');
 			}
-			include(APP_ROOT . '/app/themes/' . strtolower($config_theme['active_theme']) . '/' . strtolower($config_theme['active_theme']) . '.page.php');
+			$layout_engine->loadTheme();
 		}
-
-		public function testConection(): bool
+		
+		public function testConection() : bool
 		{
 			$dbconfig = $this->getConfig()['data_base'];
 			$dsn  = $dbconfig['type'] . ':dbname=' . $dbconfig['name']. ';host=' . $dbconfig['host'];
@@ -33,20 +27,9 @@
 			    $conection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			    return true;
 			} catch (\PDOException $e) {
-			    echo $e->getMessage();
-			    return false;
+				$this->message_handler->setMessage('PDO01','Critical Error', $e->getMessage(), $e->getTraceAsString());
+				return false;
 			}
 
-		}
-
-		public function loadJs()
-		{
-
-		}
-
-		public function loadCss()
-		{
-			
-		}
-
+		}		
 	}

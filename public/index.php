@@ -6,4 +6,4 @@
 	$loader = require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 	$bootstrap = new App\Core\Bootstrap();
-	$bootstrap->loadTheme();
+	$bootstrap->loadelementary();

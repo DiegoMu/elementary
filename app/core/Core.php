@@ -8,10 +8,12 @@
 	class Core
 	{
 		public $config;
+		public $message_handler;
 
 		public function __construct()
 		{
 			$this->setConfig();
+			$this->message_handler = new MessageHandler();
 		}
 
 		public function setConfig(): void
@@ -31,4 +33,22 @@
 		{
 			return $this->config;
 		}
+
+		public function arraySortByField($array = array(), $field): array
+		{
+			$keys = array();
+			$ordererArray = array();
+
+		    foreach ($array as $key => $row){
+		    	$keys[$key] = $row[$field];
+		    }
+
+    		asort($keys);
+
+		    foreach ($keys as $key => $row){
+		      $ordererArray[] = $array[$key];
+		    } 
+		    return $ordererArray;
+		}
+
 	}
