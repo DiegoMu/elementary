@@ -10,12 +10,18 @@
 	<?php endforeach; ?>
 </head>
 <body>
-	<div class="<?=$container_class?>">
-	<?php foreach ($regions as $region) :?>
-		<<?=$region['wrapper']?> class="<?=$region['class']?>" id="<?=$region['id']?>" >
-			<?php $this->renderRegion($region['content'], $region['template']) ?>
-		</<?=$region['wrapper']?>>
-	<?php endforeach; ?>
+	<div class="<?=$container_class?>">	
+		<div class="row">
+		<?php foreach ($regions as $region) :?>
+			<<?=$region['wrapper']?> class="<?=$region['class']?>" id="<?=$region['id']?>" >
+			<div class="row">
+				<div class="col-12">
+					<?php $this->renderRegion($region['content'], $region['template']) ?>
+				</div>
+			</div>
+			</<?=$region['wrapper']?>>
+		<?php endforeach; ?>
+		</div>
 	</div>
 </body>
 </html>

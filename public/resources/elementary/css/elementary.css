@@ -1,0 +1,17 @@
+header {
+	min-height: 10vh;
+	background-color: #67cc677a;
+	border-bottom: 6px solid #5e7be4; 
+}
+nav{
+	min-height: 80vh;
+	border-right: 2px solid #a08989ad;
+}
+article{
+	min-height: 80vh;
+}
+footer{
+	min-height: 10vh;
+	background-color: #67cc677a;
+	border-top: 6px solid #5e7be4; 
+}

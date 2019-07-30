@@ -7,11 +7,16 @@
 	class Bootstrap extends Core
 	{
 
-		public function loadelementary() {
+		public function loadElementary() {
 			$layout_engine = new LayoutEngine();
-			if (!$this->testConection()) {
-				$layout_engine->setRegion('content', $this->message_handler->getMessage(), array('display'=>true), 'error');
+			Router::setRoutes();
+			if ($this->config['use_database']) {
+				if (!$this->testConection()) {
+					$layout_engine->setRegion('content', $this->message_handler->getMessage(), array('display'=>true), 'error');
+				}
 			}
+			
+			$layout_engine->setRegion('header', "<p class='display-1'>Elementary</p>", array('display'=>true), false);
 			$layout_engine->loadTheme();
 		}
 		
@@ -25,6 +30,7 @@
 			try {
 			    $conection = new \PDO($dsn, $usr, $pass);
 			    $conection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			    $conection = null;
 			    return true;
 			} catch (\PDOException $e) {
 				$this->message_handler->setMessage('PDO01','Critical Error', $e->getMessage(), $e->getTraceAsString());

@@ -10,6 +10,7 @@
 
 		public function __construct()
 		{
+			$this->message_handler = new MessageHandler();
 			$this->setConfig();
 			$this->setThemeConfig();
 			$this->setLayout();
@@ -27,16 +28,15 @@
 		{
 			$resourses_to_load = array();
 			$resourses = $this->arraySortByField($this->theme_settings['require'], 'load_order');
+
 			foreach ($resourses as $resource) {
 				if ($resource['public']) {
-
 					if (isset($resource['js'])) {
 						foreach ($resource['js'] as $js_resource) {
 							$js_resource = explode('/', $js_resource);
 							$resourses_to_load['js'][] = '/resources/' .$resource['name'] . '/js/' . end($js_resource);
 						}
 					}
-
 					if (isset($resource['css'])) {
 						foreach ($resource['css'] as $css_resource) {
 							$css_resource = explode('/', $css_resource);
@@ -44,6 +44,14 @@
 						}
 					}
 				}
+			}
+
+			foreach ($this->theme_settings['jscirpts'] as $jscirpts) {
+				$resourses_to_load['js'][] = '/resources/' . $this->theme_settings['jscripts_directory'] . '/' . $jscirpts;
+			}
+
+			foreach ($this->theme_settings['styleshets'] as $styleshet) {
+				$resourses_to_load['css'][] = '/resources/' . $this->theme_settings['css_directory'] . '/' .$styleshet;
 			}
 
 			return $resourses_to_load;

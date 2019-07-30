@@ -35,7 +35,10 @@
 		{
 			echo $this->message['type'] .'<br>';
 			echo $this->message['message'] .'<br>';
-			echo $this->message['stack_trace'] .'<br>';
+			foreach ($this->message['stack_trace'] as $stack_message) {
+				echo '#' . $stack_message .'<br>';
+			}
+			
 		}
 
 		public function getMessage()

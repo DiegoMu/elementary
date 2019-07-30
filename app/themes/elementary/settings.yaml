@@ -1,12 +1,13 @@
 name: Elementary
 version: 0.1
-css_directory: css
+css_directory: elementary/css
 files_directory: files
-jscripts_directory: js
+jscripts_directory: elementary/js
 resources_directory: resources
 template_directoy: templates
 jscirpts:
   - elementary.js
+  
 styleshets:
   - elementary.css
 require:
@@ -29,33 +30,33 @@ require:
     js:
       - /js/bootstrap.js
 layout:
-  container_class: container
+  container_class: container-fluid
   regions:
     -
       name: header
       render_order: 1
-      class: header
+      class: header col-12
       id: header
       template: 
       wrapper: header
     -
       name: navigation
       render_order: 2
-      class: nav
+      class: nav col-2
       id: nav
       template:
       wrapper: nav
     -
       name: content
       render_order: 3
-      class: content
+      class: content col-10
       id: content
       template:
       wrapper: section
     -
       name: footer
       render_order: 4
-      class: footer
+      class: footer col-12
       id: footer
       template:
       wrapper: footer
