@@ -8,12 +8,10 @@
 	class Core
 	{
 		public $config;
-		public $message_handler;
 
 		public function __construct()
 		{
 			$this->setConfig();
-			$this->message_handler = new MessageHandler();
 		}
 
 		public function setConfig(): void

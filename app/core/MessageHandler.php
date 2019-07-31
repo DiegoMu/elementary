@@ -4,31 +4,33 @@
 	use Symfony\Component\Yaml\Yaml;
 	use Symfony\Component\Yaml\Exception\ParseException;
 
-	class MessageHandler extends Core
+	class MessageHandler
 	{
 
-		private $message;
+		private static $message;
+		private static $config;
 
 		public function __construct(){
-			$this->setConfig();
+			self::setConfig();
 		}
-		public function setMessage($translingua_id, $type, $content, $stack_trace = false): void
+		static public function setMessage($translingua_id, $message, $exception = false): void
 		{
 			$date = new \DateTime();
-			$message = array();
-			$message['time_stamp'] 	= $date->getTimestamp();
-			$message['client_ip'] 	= $_SERVER['REMOTE_ADDR'];
-			$message['type'] 		= $type;
+			$new_message = array();
+			$new_message['time_stamp'] 	= $date->getTimestamp();
+			$new_message['client_ip'] 	= $_SERVER['REMOTE_ADDR'];
 
-			if($this->config['debug_enable']) {
-				$message['message'] 	= $content;
-				$message['stack_trace'] = explode('#', $stack_trace);
+			if(self::$config['debug_enable']) {
+				$new_message['type']		= '';
+				$new_message['message'] 	= $message;
+				$new_message['stack_trace'] = explode('#', $exception->getTraceAsString());
 			} else {
-				$message['message'] 	= $this->loadMessagesTemplate($translingua_id)['text'];
-				$message['stack_trace'] = '';
+				$new_message['type'] 	= self::loadMessageFromTemplate($translingua_id)['type'];
+				$new_message['message'] = self::loadMessageFromTemplate($translingua_id)['text'];
+				$new_message['stack_trace'] = false;
 			}
 
-			$this->message = $message;
+			self::$message = $new_message;
 		}
 
 		public function printMessage(): void
@@ -43,13 +45,13 @@
 
 		public function getMessage()
 		{
-			return $this->message;
+			return self::$message;
 		}
 
-		private function loadMessagesTemplate($translingua_id){
+		private function loadMessageFromTemplate($translingua_id){
 			try
 			{
-				$template_message = Yaml::parseFile(__DIR__ . '/localize/' . $this->config['languague'] . '/messages.yaml');
+				$template_message = Yaml::parseFile(__DIR__ . '/localize/' . self::$config['languague'] . '/messages.yaml');
 				$error_message = $template_message['error_messages'][$translingua_id];
 				return $error_message;
 			} catch (ParseException $e) {
@@ -57,5 +59,18 @@
 				print($e->getTraceAsString());
 				return false;
 			}
+		}
+
+		static public function setConfig(): void
+		{
+			try
+			{
+				self::$config = Yaml::parseFile(APP_ROOT . '/conf/settings.yaml');
+				
+			} catch (ParseException $e) {
+				print($e->getMessage());
+				print($e->getTraceAsString());
+			}	
+			
 		}
 	}

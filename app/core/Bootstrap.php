@@ -9,10 +9,10 @@
 
 		public function loadElementary() {
 			$layout_engine = new LayoutEngine();
-			Router::setRoutes();
+			var_dump(Router::setRoutes());
 			if ($this->config['use_database']) {
 				if (!$this->testConection()) {
-					$layout_engine->setRegion('content', $this->message_handler->getMessage(), array('display'=>true), 'error');
+					$layout_engine->setRegion('content', MessageHandler::getMessage(), array('display'=>true), 'error');
 				}
 			}
 			
@@ -32,8 +32,8 @@
 			    $conection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			    $conection = null;
 			    return true;
-			} catch (\PDOException $e) {
-				$this->message_handler->setMessage('PDO01','Critical Error', $e->getMessage(), $e->getTraceAsString());
+			} catch (\PDOException $exception) {
+				MessageHandler::setMessage('PDO01', $exception->getMessage(), $exception);
 				return false;
 			}
 
